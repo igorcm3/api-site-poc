@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,13 +27,13 @@ public class NivelEnsinoController {
 
     private final NivelEnsinoService nivelEnsinoService;
 
-    @GetMapping(value = "/save")
-    public ResponseEntity<?> saveNivelEnsino(NivelEnsinoDTO dto){
+    @PostMapping(value = "/save")
+    public ResponseEntity<?> saveNivelEnsino(@RequestBody NivelEnsinoDTO dto){
         ResponseError responseError = new ResponseError();
         try {
             NivelEnsino nivelEnsino = nivelEnsinoService.nivelEnsinoDTOtoNivelEnsino(dto);
             nivelEnsinoService.saveNivelEnsino(nivelEnsino);
-            return ResponseEntity.ok(nivelEnsino);
+            return ResponseEntity.ok(nivelEnsinoService.nivelEnsinoToDTO(nivelEnsino));
         }catch(Exception e){
             log.info("Erro ao salvar NivelEnsino: {}", dto);
             responseError.getError().add(e.toString());

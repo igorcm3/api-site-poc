@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import br.com.unoesc.academicolegadopub.models.Area;
 import br.com.unoesc.academicolegadopub.models.dto.AreaDTO;
+import br.com.unoesc.academicolegadopub.producers.AreaProducer;
 import br.com.unoesc.academicolegadopub.repositories.AreaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,8 @@ public class AreaService {
 
     private final AreaRepository areaRepository;
 
+    private final AreaProducer areaProducer;
+
     public Optional<Area> findByCodigo(final Long codigoArea){
         return this.areaRepository.findById(codigoArea);
     }
@@ -26,6 +29,8 @@ public class AreaService {
     }
 
     public Area saveArea(Area area){
+        Area areaSaved = this.areaRepository.save(area);
+        areaProducer.sendSaveArea(areaToDTO(areaSaved));
         return this.areaRepository.save(area);
     }
 
