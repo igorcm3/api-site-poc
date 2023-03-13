@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/academico-legado-pub/academico-legado-pub.iml" filepath="$PROJECT_DIR$/academico-legado-pub/academico-legado-pub.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/api-site-poc.iml" filepath="$PROJECT_DIR$/.idea/api-site-poc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api-site-sub/api-site-sub.iml" filepath="$PROJECT_DIR$/api-site-sub/api-site-sub.iml" />
+    </modules>
+  </component>
+</project>
