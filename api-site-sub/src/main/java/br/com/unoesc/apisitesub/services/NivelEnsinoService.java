@@ -45,4 +45,16 @@ public class NivelEnsinoService {
     public NivelEnsinoDTO nivelEnsinoToDTO(final NivelEnsino nv) {
         return NivelEnsinoDTO.builder().codigo(nv.getCodigo()).nomeNivelEnsino(nv.getNomeNivelEnsino()).build();
     }
+
+    public NivelEnsino saveOrUpdate(final NivelEnsinoDTO nivelEnsinoDTO) {
+        Optional<NivelEnsino> nivelEnsinoOpt = findByCodigo(nivelEnsinoDTO.getCodigo());
+        NivelEnsino nivelEnsino;
+        if(nivelEnsinoOpt.isPresent()){
+            nivelEnsino = nivelEnsinoOpt.get();
+            nivelEnsino.setNomeNivelEnsino(nivelEnsinoDTO.getNomeNivelEnsino());
+        }else{
+            nivelEnsino = nivelEnsinoDTOtoNivelEnsino(nivelEnsinoDTO);
+        }
+        return saveNivelEnsino(nivelEnsino);
+    }
 }

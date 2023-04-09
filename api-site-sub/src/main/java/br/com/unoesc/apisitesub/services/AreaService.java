@@ -5,6 +5,7 @@ import java.util.Optional;
 import br.com.unoesc.apisitesub.models.Area;
 import br.com.unoesc.apisitesub.models.dto.AreaDTO;
 import br.com.unoesc.apisitesub.repositories.AreaRepository;
+import javax.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,15 @@ public class AreaService {
     public void deleteArea(Area area){
         this.areaRepository.delete(area);
     }
+    public void deleteArea(AreaDTO areaDto){
+        final Optional<Area> areaOptional = this.findByCodigo(areaDto.getCodigo());
+        if(areaOptional.isPresent()){
+            this.areaRepository.delete(areaOptional.get());
+        }else{
+            throw new EntityNotFoundException("Entidade não existe - Area:{"+areaDto+"}");
+        }
 
+    }
     public void deleteAreaByCodigo(Long codigoArea){
         this.areaRepository.deleteById(codigoArea);
     }

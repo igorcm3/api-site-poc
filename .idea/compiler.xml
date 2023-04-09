@@ -11,10 +11,6 @@
         <module name="academico-legado-pub" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="academico-legado-pub" target="1.8" />
-      <module name="api-site-sub" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

@@ -6,6 +6,7 @@ import br.com.unoesc.academicolegadopub.models.Area;
 import br.com.unoesc.academicolegadopub.models.dto.AreaDTO;
 import br.com.unoesc.academicolegadopub.producers.AreaProducer;
 import br.com.unoesc.academicolegadopub.repositories.AreaRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class AreaService {
         return this.areaRepository.findAll();
     }
 
-    public Area saveArea(Area area){
+    public Area saveArea(Area area) throws JsonProcessingException {
         Area areaSaved = this.areaRepository.save(area);
         areaProducer.sendSaveArea(areaToDTO(areaSaved));
         return this.areaRepository.save(area);
