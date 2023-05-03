@@ -35,12 +35,13 @@ public class AreaService {
         return this.areaRepository.save(area);
     }
 
-    public void deleteArea(Area area){
+    public void deleteArea(Area area) {
         this.areaRepository.delete(area);
     }
 
-    public void deleteAreaByCodigo(Long codigoArea){
+    public void deleteAreaByCodigo(Long codigoArea) throws JsonProcessingException {
         this.areaRepository.deleteById(codigoArea);
+        areaProducer.sendDeleteArea(codigoArea);
     }
 
 

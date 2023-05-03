@@ -1,7 +1,6 @@
 package br.com.unoesc.apisitesub.consumers;
 
 import br.com.unoesc.apisitesub.models.dto.AreaDTO;
-import br.com.unoesc.apisitesub.models.dto.NivelEnsinoDTO;
 import br.com.unoesc.apisitesub.services.AreaService;
 import br.com.unoesc.apisitesub.services.NivelEnsinoService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -29,17 +28,17 @@ public class AcademicoConsumer {
     }
 
     @RabbitListener(queues = "${area.deleted.queue}")
-    public void areaDeletedConsumer(String areaDTOStr) throws JsonProcessingException {
-        areaService.deleteArea(mapper.readValue(areaDTOStr, AreaDTO.class));
+    public void areaDeletedConsumer(String codigoArea) throws JsonProcessingException {
+        areaService.deleteAreaByCodigo(mapper.readValue(codigoArea, Long.class));
     }
 
-    @RabbitListener(queues = "${nivel-ensino.saved.queue} ")
-    public void nivelEnsinoSavedConsumer(String nivelEnsinoDTOStr) throws JsonProcessingException {
-        nivelEnsinoService.saveOrUpdate(mapper.readValue(nivelEnsinoDTOStr, NivelEnsinoDTO.class));
-    }
-
-    @RabbitListener(queues = "${nivel-ensino.deleted.queue} ")
-    public void nivelEnsinoDeletedConsumer(String nivelEnsinoDTOStr) throws JsonProcessingException {
-        nivelEnsinoService.saveOrUpdate(mapper.readValue(nivelEnsinoDTOStr, NivelEnsinoDTO.class));
-    }
+//    @RabbitListener(queues = "${nivel-ensino.saved.queue} ")
+//    public void nivelEnsinoSavedConsumer(String nivelEnsinoDTOStr) throws JsonProcessingException {
+//        nivelEnsinoService.saveOrUpdate(mapper.readValue(nivelEnsinoDTOStr, NivelEnsinoDTO.class));
+//    }
+//
+//    @RabbitListener(queues = "${nivel-ensino.deleted.queue} ")
+//    public void nivelEnsinoDeletedConsumer(String nivelEnsinoDTOStr) throws JsonProcessingException {
+//        nivelEnsinoService.saveOrUpdate(mapper.readValue(nivelEnsinoDTOStr, NivelEnsinoDTO.class));
+//    }
 }

@@ -22,8 +22,15 @@ public class AreaProducer {
     @Value("${area.saved.queue}")
     private String areaQueueStr;
 
+    @Value("${area.deleted.queue}")
+    private String areaDeleteQueueStr;
+
     public void sendSaveArea(AreaDTO areaDTO) throws JsonProcessingException {
         rabbitTemplate.convertAndSend(areaQueueStr, mapper.writeValueAsString(areaDTO));
+    }
+
+    public void sendDeleteArea(Long codigoArea) throws JsonProcessingException {
+        rabbitTemplate.convertAndSend(areaDeleteQueueStr, mapper.writeValueAsString(codigoArea));
     }
 
 }
